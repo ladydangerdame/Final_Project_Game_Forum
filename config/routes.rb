@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :messages do
-    resources :comments
-  end
-  root 'messages#index'
+    root 'messages#index'
+    resources :users
+    devise_for :users, :path_prefix => 'd'
+    get 'users/:id' => 'users#show'
+
+    resources :messages do
+        resources :comments
+    end
 end
